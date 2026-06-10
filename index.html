@@ -529,12 +529,22 @@
     }
     #App h2 {span color:{ var(--red);}
     
-     .App-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2px;
+     .fuente{
+      font-family: 'Space Grotesc' , sans-serif
+      font-size: clamp(1.2rem, 3vw, 2rem)
+      line-height: 1.8;
+      color: var(--black);
     }
 
+    .fuente{
+      color: var(--red);
+      text-decoration: none;
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      font-weight: 700;
+      border-bottom: 2px solid var(--red)
+      transition: opacity 0.2s;
+    }
+    
     /* ── ANIMATIONS ── */
     .reveal {
       opacity: 0;
@@ -788,7 +798,7 @@
     </h2>
   </section>
   
-    <script
+    <script>
     // Hamburger
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
