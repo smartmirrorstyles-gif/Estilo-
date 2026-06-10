@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Oufit — M.O</title>
+  <title>Estilovers — E.L</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -515,6 +515,27 @@
       position: relative;
     }
 
+    /*__ App __*/
+     #App {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    #App h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 4rem;
+    }
+
+    #App h2 span { color: var(--red); }
+
+    .equipo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+    }
+
     /* ── ANIMATIONS ── */
     .reveal {
       opacity: 0;
@@ -760,10 +781,14 @@
       <span class="line3">Y CONFIANZA</span>
     </h2>
   </section>
+
+  <!--App -->
+  <section id= "App">
+    <h2 class= "reveal">
+      <p class="fuente"><strong>Nuestra App</strong> — E.L <br /><a href="https://sage-licorice-d5b621.netlify.app/" target="_blank">https://sage-licorice-d5b621.netlify.app/</a></p>
+
   
-            <p class="fuente"><strong>Nuestra App</strong> — E.L <br /><a href="https://sage-licorice-d5b621.netlify.app/" target="_blank">https://sage-licorice-d5b621.netlify.app/</a></p>
-  
-  <script>
+    <script
     // Hamburger
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
