@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estilovers — E.L</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #FF3B1E;
+      --black: #0a0a0a;
+      --white: #F5F0EB;
+      --off-white: #ede8e2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      mix-blend-mode: difference;
+    }
+
+    @media (max-width: 900px) {
+      nav { mix-blend-mode: normal; }
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.15em;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--red);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 3rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::after {
+      content:'M.O';
+      position: absolute;
+      bottom: -0.1em;
+      right: -0.05em;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(8rem, 22vw, 22rem);
+      color: rgba(0,0,0,0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .hero-text h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 14rem);
+      line-height: 0.88;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      max-width: 28ch;
+      line-height: 1.5;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-top: 2.5rem;
+      border: 2px solid var(--black);
+      padding: 0.6rem 1.4rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    .hero-illustration {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .mirror-card {
+      width: min(360px, 85%);
+      aspect-ratio: 3/4;
+      border: 3px solid var(--black);
+      position: relative;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .mirror-inner {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .mirror-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mirror-icon svg { width: 40px; height: 40px; fill: var(--black); }
+
+    .mirror-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--black);
+      letter-spacing: 0.05em;
+    }
+
+    .mirror-dots {
+      display: flex; gap: 6px; margin-top: 0.5rem;
+    }
+    .mirror-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .mirror-dots span:nth-child(2) { animation-delay: 0.3s; }
+    .mirror-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes pulse {
+      0%,100% { opacity: 0.3; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1); }
+    }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--black); opacity: 0.6;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px; height: 40px;
+      background: var(--black);
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 3rem; }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── PROBLEMA ── */
+    #problema {
+      background: var(--white);
+      color: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    #problema h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      line-height: 0.9;
+      color: var(--black);
+    }
+
+    #problema h2 span { color: var(--red); }
+
+    .problema-text {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.75;
+      color: rgba(10,10,10,0.75);
+      max-width: 52ch;
+    }
+
+    .problema-text strong {
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    /* ── FUNCIONALIDADES ── */
+    #funciones {
+      background: var(--black);
+      position: relative;
+    }
+
+    #funciones h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    #funciones h2 .accent { color: var(--red); }
+
+    .funciones-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+    }
+
+    .funcion-card {
+      background: #141414;
+      padding: 2.5rem 2rem;
+      border-top: 3px solid var(--red);
+      transition: background 0.3s;
+    }
+
+    .funcion-card:hover { background: #1c1c1c; }
+
+    .funcion-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .funcion-title {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .funcion-desc {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      opacity: 0.6;
+    }
+
+    /* ── QUOTE ── */
+    #quote {
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 6rem 3rem;
+    }
+
+    #quote blockquote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 9rem);
+      line-height: 0.92;
+      color: var(--black);
+      text-align: center;
+      max-width: 18ch;
+    }
+
+    /* ── VISION ── */
+    #vision {
+      background: var(--off-white);
+      color: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    #vision h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      line-height: 0.9;
+    }
+
+    #vision h2 .accent { color: var(--red); }
+
+    .vision-text {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.75;
+      color: rgba(10,10,10,0.7);
+    }
+
+    .vision-pill {
+      display: inline-block;
+      margin-top: 2rem;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.7rem 1.8rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── MOTIVACION ── */
+    #motivacion {
+      background: var(--black);
+    }
+
+    #motivacion h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 13rem);
+      line-height: 0.9;
+      color: var(--red);
+    }
+
+    .motivacion-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      align-items: center;
+    }
+
+    .motivacion-text {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.75;
+      opacity: 0.75;
+      max-width: 48ch;
+    }
+
+    .motivacion-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      opacity: 0.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-bottom: 0.3rem;
+    }
+
+    /* ── EQUIPO ── */
+    #equipo {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    #equipo h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 4rem;
+    }
+
+    #equipo h2 span { color: var(--red); }
+
+    .equipo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+    }
+
+    .miembro {
+      background: var(--off-white);
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .miembro:hover { background: var(--red); color: var(--black); }
+    .miembro:hover .miembro-rol { color: var(--black); opacity: 0.7; }
+
+    .miembro-rol {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .miembro:hover .miembro-rol { color: var(--black); }
+
+    .miembro-nombre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── CIERRE ── */
+    #cierre {
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cierre::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(255,59,30,0.12) 0%, transparent 70%);
+    }
+
+    #cierre h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 9rem);
+      line-height: 0.9;
+      position: relative;
+    }
+
+    #cierre h2 .line1 { color: var(--white); display: block; }
+    #cierre h2 .line2 { color: var(--red); display: block; }
+    #cierre h2 .line3 { color: var(--white); display: block; }
+
+    .cierre-logo {
+      margin-top: 3rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      position: relative;
+    }
+
+    /*__ App __*/
+     #App {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    #App h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 4rem;
+    }
+    #App h2 span { color: var(--red); }
+
+    .fuente {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      line-height: 1.8;
+      color: var(--black);
+    }
+
+    .fuente a {
+      color: var(--red);
+      text-decoration: none;
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      font-weight: 700;
+      border-bottom: 2px solid var(--red);
+      transition: opacity 0.2s;
+    }
+
+    .fuente a:hover { opacity: 0.7; }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { mix-blend-mode: normal; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 5rem 1.5rem 5rem;
+        min-height: 100vh;
+      }
+
+      .hero-illustration { display: none; }
+
+      #problema, #vision {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .funciones-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .motivacion-body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      section { padding: 4rem 1.5rem; }
+
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--red);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 99;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1rem;
+        color: var(--black);
+      }
+
+      .hamburger { display: flex; }
+
+      #cierre { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      #funciones h2 { font-size: 3.5rem; }
+      #quote blockquote { font-size: 2.2rem; }
+      #quote { min-height: auto; padding: 4rem 1.5rem; }
+      #cierre h2 { font-size: clamp(2.5rem, 10vw, 5rem); }
+      .scroll-hint { display: none; }
+      .stat-num { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">E.L</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#funciones">Funciones</a></li>
+      <li><a href="#vision">Visión</a></li>
+      <li><a href="#equipo">Desarolladores</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text reveal">
+      <h1>EstiLovers</h1>
+      <p class="hero-sub">Un asesor de imagen personal con inteligencia artificial</p>
+      <span class="hero-badge">E.L— IA + Moda</span>
+    </div>
+    <div class="hero-illustration">
+      <div class="mirror-card">
+        <div class="mirror-inner">
+          <div class="mirror-icon">
+            <svg viewBox="0 0 40 40"><rect x="8" y="4" width="24" height="32" rx="2"/><circle cx="20" cy="14" r="5"/><path d="M10 36c0-6 4-10 10-10s10 4 10 10"/></svg>
+          </div>
+          <span class="mirror-label">Tu Estilo</span>
+          <div class="mirror-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section id="problema">
+    <div class="reveal">
+      <div class="section-label">El Problema</div>
+      <h2>¿QUÉ ME<br><span>PONDRÉ</span><br>HOY?</h2>
+    </div>
+    <div class="reveal">
+      <p class="problema-text">
+        Un problema habitual que todos enfrentamos a diario es la dificultad de
+        <strong>elegir un outfit adecuado</strong> según la ocasión o nuestro
+        estilo personal.<br><br>
+        Con <strong>Estilovers</strong> ofrecemos soluciones rápidas,
+        personalizadas y accesibles que combinan inteligencia artificial con
+        conocimiento profundo de moda para simplificar esa elección diaria.
+      </p>
+    </div>
+  </section>
+
+  <!-- FUNCIONES -->
+  <section id="funciones">
+    <div class="reveal">
+      <div class="section-label">02 — Funcionalidades</div>
+      <h2>TU ESTILO<br><span class="accent">POTENCIADO</span><br>CON TECNOLOGÍA</h2>
+    </div>
+    <div class="funciones-grid">
+      <div class="funcion-card reveal">
+        <div class="funcion-num">01</div>
+        <div class="funcion-title">Escaneo & Combinaciones Virtuales</div>
+        <p class="funcion-desc">Nuestra app escanea tu ropa y crea combinaciones virtuales, permitiéndote probar outfits sin cambiarte físicamente.</p>
+      </div>
+      <div class="funcion-card reveal">
+        <div class="funcion-num">02</div>
+        <div class="funcion-title">Recomendaciones Personalizadas</div>
+        <p class="funcion-desc">Sugerencias de accesorios, paletas de colores y estilos adaptados exactamente a tu perfil y preferencias estéticas.</p>
+      </div>
+      <div class="funcion-card reveal">
+        <div class="funcion-num">03</div>
+        <div class="funcion-title">Guardarropa Digital Inteligente</div>
+        <p class="funcion-desc">Organización intuitiva de tu closet virtual que maximiza el uso de todas tus prendas y facilita la elección diaria.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section id="quote">
+    <blockquote class="reveal">
+      "LA FORMA EN QUE VESTIMOS ES EL REFLEJO DE NUESTRA PERSONALIDAD"
+    </blockquote>
+  </section>
+
+  <!-- VISION -->
+  <section id="vision">
+    <div class="reveal">
+      <div class="section-label">03 — Nuestra Visión</div>
+      <h2>EXPRÉ<span class="accent">SATE</span></h2>
+    </div>
+    <div class="reveal">
+      <p class="vision-text">
+        Queremos revolucionar la búsqueda de tu identidad visual: darte una nueva
+        apariencia o mejorarla, complaciendo tus gustos y visiones estéticas.<br><br>
+        La ropa es una de las principales formas en las cuales nos expresamos.
+        Con E.L, esa expresión se vuelve más libre, más auténtica y más tú.
+      </p>
+      <span class="vision-pill">Exprésate sin límites</span>
+    </div>
+  </section>
+
+  <!-- MOTIVACION -->
+  <section id="motivacion">
+    <h2 class="reveal">MOTIVACIÓN</h2>
+    <div class="motivacion-body">
+      <p class="motivacion-text reveal">
+        Esa necesidad humana de darnos a conocer y descubrir nuevas experiencias
+        es uno de nuestros objetivos centrales. Te brindamos un sinfín de nuevas
+        formas para expresar tu personalidad y explorar tu creatividad con
+        nuestras recomendaciones inteligentes.
+      </p>
+      <div class="motivacion-stats reveal">
+        <div class="stat-row">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Funciones principales de IA</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Combinaciones posibles de outfits</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Estilo único: el tuyo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section id="equipo">
+    <div class="reveal">
+      <div class="section-label">04 — Nuestro Equipo De Desarollo</div>
+      <h2>EQUIPO DE<br><span>DESAROLLO</span></h2>
+    </div>
+    <div class="equipo-grid">
+      <div class="miembro reveal">
+        <div class="miembro-rol">director</div>
+        <div class="miembro-nombre">Víctor Enmanuel</div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-rol">desarollador 1</div>
+        <div class="miembro-nombre">Enrique Carranza</div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-rol">Analista Creativo</div>
+        <div class="miembro-nombre">Manuel Heriberto</div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-rol">Desarollador 2</div>
+        <div class="miembro-nombre">Alberto Barrios</div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-rol">Secretaria</div>
+        <div class="miembro-nombre">Andrea Nicole</div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-rol">Presentadora</div>
+        <div class="miembro-nombre">Natalia Soribel</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section id="cierre">
+    <h2 class="reveal">
+      <span class="line1">VÍSTETE CON</span>
+      <span class="line2">AUTENTICIDAD</span>
+      <span class="line3">Y CONFIANZA</span>
+    </h2>
+  </section>
+
+  <!--App -->
+  <section id= "App">
+    <h2 class= "reveal">
+      <p class="fuente"><strong>Nuestra App</strong> — E.L <br /><a href="https://sage-licorice-d5b621.netlify.app/" target="_blank">https://sage-licorice-d5b621.netlify.app/</a></p>
+    </h2>
+  </section>
+  
+    <script>
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
